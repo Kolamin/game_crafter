@@ -1,10 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://p0pm8y26okus"]
+[gd_scene load_steps=12 format=3 uid="uid://p0pm8y26okus"]
 
 [ext_resource type="PackedScene" uid="uid://dtctyojgqw6vf" path="res://Player/player.tscn" id="1_701st"]
 [ext_resource type="Texture2D" uid="uid://3deih6mi80mu" path="res://oak_woods_v1.0/background/background_layer_1.png" id="2_ncpa6"]
 [ext_resource type="Texture2D" uid="uid://iow76e7dkm1s" path="res://oak_woods_v1.0/background/background_layer_2.png" id="3_daj6w"]
 [ext_resource type="Texture2D" uid="uid://5shv84pbrc7f" path="res://oak_woods_v1.0/background/background_layer_3.png" id="4_es4lw"]
 [ext_resource type="Texture2D" uid="uid://cl48cg5igr1jg" path="res://oak_woods_v1.0/oak_woods_tileset.png" id="5_sbhha"]
+[ext_resource type="PackedScene" uid="uid://cqwm8xisglprv" path="res://Build/shop.tscn" id="6_dwfsf"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_bc8hc"]
 texture = ExtResource("5_sbhha")
@@ -1306,6 +1307,9 @@ position = Vector2(574.5, 327)
 scale = Vector2(3.60313, 3.57778)
 texture = ExtResource("4_es4lw")
 
+[node name="Shop" parent="." instance=ExtResource("6_dwfsf")]
+position = Vector2(83, 537)
+
 [node name="TileMap" type="TileMap" parent="."]
 position = Vector2(2, 9)
 tile_set = SubResource("TileSet_bqvua")
@@ -1315,7 +1319,7 @@ layer_0/tile_data = PackedInt32Array(2293761, 131072, 0, 2293762, 196608, 0, 229
 [node name="Player" type="Node2D" parent="."]
 
 [node name="Player" parent="Player" instance=ExtResource("1_701st")]
-position = Vector2(141, 544)
+position = Vector2(178, 551)
 
 [node name="Mobs" type="Node2D" parent="."]
 
