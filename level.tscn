@@ -1,5 +1,6 @@
-[gd_scene load_steps=12 format=3 uid="uid://p0pm8y26okus"]
+[gd_scene load_steps=13 format=3 uid="uid://p0pm8y26okus"]
 
+[ext_resource type="Script" path="res://level.gd" id="1_226ms"]
 [ext_resource type="PackedScene" uid="uid://dtctyojgqw6vf" path="res://Player/player.tscn" id="1_701st"]
 [ext_resource type="Texture2D" uid="uid://3deih6mi80mu" path="res://oak_woods_v1.0/background/background_layer_1.png" id="2_ncpa6"]
 [ext_resource type="Texture2D" uid="uid://iow76e7dkm1s" path="res://oak_woods_v1.0/background/background_layer_2.png" id="3_daj6w"]
@@ -1275,6 +1276,7 @@ var gold = preload(\"res://Collectibles/gold.tscn\")
 "
 
 [node name="Level" type="Node2D"]
+script = ExtResource("1_226ms")
 
 [node name="BG" type="ParallaxBackground" parent="."]
 layer = -1
@@ -1352,6 +1354,13 @@ wait_time = 3.0
 autostart = true
 
 [node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
-energy = 0.2
+enabled = false
+energy = 0.95
 blend_mode = 1
 range_layer_min = -1
+
+[node name="DayNight" type="Timer" parent="."]
+wait_time = 30.0
+autostart = true
+
+[connection signal="timeout" from="DayNight" to="." method="_on_day_night_timeout"]
