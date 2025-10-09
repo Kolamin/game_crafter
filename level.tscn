@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://5shv84pbrc7f" path="res://oak_woods_v1.0/background/background_layer_3.png" id="4_es4lw"]
 [ext_resource type="Texture2D" uid="uid://cl48cg5igr1jg" path="res://oak_woods_v1.0/oak_woods_tileset.png" id="5_sbhha"]
 [ext_resource type="PackedScene" uid="uid://cqwm8xisglprv" path="res://Build/shop.tscn" id="6_dwfsf"]
-[ext_resource type="PackedScene" uid="uid://hj0hhdw1jyqs" path="res://Mobs/mushroom.tscn" id="8_i2t4f"]
+[ext_resource type="PackedScene" uid="uid://cxnlx6jgjsagx" path="res://Mobs/mushroom.tscn" id="8_i2t4f"]
 [ext_resource type="Texture2D" uid="uid://gxsmfn8x671q" path="res://oak_woods_v1.0/decorations/circle.png" id="8_km5ld"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_bc8hc"]
