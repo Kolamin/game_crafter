@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=4 uid="uid://p0pm8y26okus"]
+[gd_scene load_steps=18 format=4 uid="uid://p0pm8y26okus"]
 
 [ext_resource type="Script" uid="uid://bgco1nrsoeeev" path="res://level.gd" id="1_226ms"]
 [ext_resource type="PackedScene" uid="uid://dtctyojgqw6vf" path="res://Player/player.tscn" id="1_701st"]
@@ -428,34 +428,6 @@ physics_layer_0/collision_layer = 1
 physics_layer_0/collision_mask = 0
 sources/0 = SubResource("TileSetAtlasSource_bc8hc")
 
-[sub_resource type="GDScript" id="GDScript_hmav5"]
-script/source = "extends Label
-
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta):
-	text = \"HP: \" + str($\"../../Player/Player\".health)
-"
-
-[sub_resource type="GDScript" id="GDScript_4vnd5"]
-script/source = "extends Label
-
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta):
-	text = \"GOLD: \" + str($\"../../Player/Player\".gold)
-"
-
 [sub_resource type="Animation" id="Animation_i2t4f"]
 length = 0.001
 tracks/0/type = "value"
@@ -579,24 +551,6 @@ tile_set = SubResource("TileSet_bqvua")
 position = Vector2(-9, 548)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="Label" type="Label" parent="CanvasLayer"]
-offset_left = 33.0
-offset_top = 20.0
-offset_right = 121.0
-offset_bottom = 63.0
-theme_override_font_sizes/font_size = 30
-text = "HP"
-script = SubResource("GDScript_hmav5")
-
-[node name="Label2" type="Label" parent="CanvasLayer"]
-offset_left = 36.0
-offset_top = 71.0
-offset_right = 91.0
-offset_bottom = 103.0
-theme_override_font_sizes/font_size = 30
-text = "GOLD"
-script = SubResource("GDScript_4vnd5")
 
 [node name="DayText" type="Label" parent="CanvasLayer"]
 modulate = Color(1, 1, 1, 0)

@@ -6,7 +6,9 @@ enum {
 	ATTACK2,
 	ATTACK3,
 	BLOCK,
-	SLIDE
+	SLIDE,
+	DAMAGE,
+	DEATH
 }
 
 const SPEED = 150.0
@@ -25,7 +27,18 @@ var combo = false
 var attack_cooldown = false
 var player_pos
 
+func _ready() -> void:
+	Signals.connect("enemy_atack", Callable(self, "on_damage_recieved"))
+
 func _physics_process(delta):
+	
+	# Add the gravity.
+	if not is_on_floor():
+		velocity.y += gravity * delta
+	
+	if velocity.y > 0:
+		animPlayer.play("Fall")
+	
 	
 	match state:
 		MOVE:
@@ -40,26 +53,21 @@ func _physics_process(delta):
 			block_state()
 		SLIDE:
 			slide_state()
-	
-	# Add the gravity.
-	if not is_on_floor():
-		velocity.y += gravity * delta
-
-
+		DAMAGE:
+			damage_state()
+		DEATH:
+			death_state()
 		
-	if velocity.y > 0:
-		animPlayer.play("Fall")
-		
-	if health <= 0:
-		health = 0
-		animPlayer.play("Death")
-		await animPlayer.animation_finished
-		queue_free()
-		get_tree().change_scene_to_file("res://menu.tscn")
-
 	move_and_slide()
 	player_pos = self.position
 	Signals.emit_signal("player_position_update", player_pos)
+	
+func death_state():
+	velocity.x = 0
+	anim.play("Death")
+	await get_tree().create_timer(1).timeout
+	queue_free()
+	get_tree().change_scene_to_file("res://menu.tscn")
 
 func move_state():
 	var direction = Input.get_axis("left", "right")
@@ -133,3 +141,18 @@ func attack_freeze():
 	attack_cooldown = true
 	await get_tree().create_timer(0.5).timeout
 	attack_cooldown = false
+
+func damage_state():
+	velocity.x = 0
+	anim.play("Damage")
+	await anim.animation_finished
+	state = MOVE
+
+func on_damage_recieved(enemy_damage):
+	health -= enemy_damage
+	if health <= 0:
+		health = 0
+		state = DEATH
+	else:
+		state = DAMAGE
+	print(health)

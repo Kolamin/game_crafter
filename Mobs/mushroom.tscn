@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=3 uid="uid://cxnlx6jgjsagx"]
+[gd_scene load_steps=46 format=3 uid="uid://cxnlx6jgjsagx"]
 
 [ext_resource type="Script" uid="uid://blcq4kadm2k3g" path="res://Mobs/mushroom.gd" id="1_selrt"]
 [ext_resource type="Texture2D" uid="uid://q7yurg01e7xl" path="res://assets/Mushroom/Attack.png" id="1_sjuu0"]
@@ -382,6 +382,9 @@ _data = {
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_selrt"]
 size = Vector2(13, 17)
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_ufykn"]
+radius = 8.0
+
 [node name="Mushroom" type="CharacterBody2D"]
 collision_layer = 4
 script = ExtResource("1_selrt")
@@ -393,8 +396,8 @@ shape = SubResource("CapsuleShape2D_wr5pi")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_mcfeu")
-animation = &"Idle"
-frame = 1
+animation = &"Attack"
+frame = 7
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -415,15 +418,23 @@ shape = SubResource("RectangleShape2D_selrt")
 
 [node name="DamageBox" parent="AttacDirection" instance=ExtResource("7_ufykn")]
 
+[node name="HurtBox" parent="AttacDirection/DamageBox" index="0"]
+collision_layer = 32
+collision_mask = 0
+
 [node name="CollisionShape2D" parent="AttacDirection/DamageBox/HurtBox" index="0"]
-position = Vector2(1, 11)
+position = Vector2(-1, 11)
 
 [node name="HitBox" parent="AttacDirection/DamageBox" index="1"]
 position = Vector2(0, 5)
+collision_layer = 0
+collision_mask = 16
 
 [node name="CollisionShape2D" parent="AttacDirection/DamageBox/HitBox" index="0"]
-position = Vector2(20, 5)
+position = Vector2(16, 5)
+shape = SubResource("CircleShape2D_ufykn")
 
 [connection signal="body_entered" from="AttacDirection/AttackRange" to="." method="_on_attack_range_body_entered"]
+[connection signal="area_entered" from="AttacDirection/DamageBox/HitBox" to="." method="_on_hit_box_area_entered"]
 
 [editable path="AttacDirection/DamageBox"]
