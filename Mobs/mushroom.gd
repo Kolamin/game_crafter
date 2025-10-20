@@ -57,15 +57,14 @@ func chace_state():
 	direction = (player - self.position).normalized()
 	if direction.x < 0:
 		sprite.flip_h = true
-		$AttacDirection.rotation_degrees = 180
+		$AttacDirection.scale.x = -1
 	else:
 		sprite.flip_h = false
-		$AttacDirection.rotation_degrees = 0
+		$AttacDirection.scale.x = 1
 
 
-#func _on_hit_box_area_entered(_area: Area2D) -> void:
-	#Signals.emit_signal("enemy_atack", damage)
 
 
-func _on_hit_box_area_entered(area: Area2D) -> void:
+
+func _on_hit_box_area_entered(_area: Area2D) -> void:
 	Signals.emit_signal("enemy_atack", damage)
