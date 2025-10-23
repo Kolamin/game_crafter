@@ -29,6 +29,9 @@ var combo = false
 var attack_cooldown = false
 var player_pos
 var max_health = 100
+var damage_basic = 10
+var damage_multiplier = 1
+var damage_current
 
 func _ready() -> void:
 	Signals.connect("enemy_atack", Callable(self, "on_damage_recieved"))
@@ -43,6 +46,7 @@ func _physics_process(delta):
 	if velocity.y > 0:
 		animPlayer.play("Fall")
 	
+	damage_current = damage_basic * damage_multiplier
 	
 	match state:
 		MOVE:
@@ -105,6 +109,7 @@ func move_state():
 		
 	
 func block_state():
+	
 	velocity.x = 0
 	animPlayer.play("Block")
 	if Input.is_action_just_released("block"):
@@ -116,6 +121,7 @@ func slide_state():
 	state = MOVE
 
 func attack_state():
+	damage_multiplier = 1
 	if Input.is_action_just_pressed("attack") and combo == true:
 		state = ATTACK2
 	velocity.x = 0
@@ -153,11 +159,20 @@ func damage_state():
 	state = MOVE
 
 func on_damage_recieved(enemy_damage):
+	if state == BLOCK:
+		enemy_damage /= 2
+	elif state == SLIDE:
+		enemy_damage = 0
+	else:
+		state = DAMAGE
 	health -= enemy_damage
 	if health <= 0:
 		health = 0
 		state = DEATH
-	else:
-		state = DAMAGE
+	
 	emit_signal("health_changed", health)
 	print(health)
+
+
+func _on_hit_box_area_entered(area: Area2D) -> void:
+	Signals.emit_signal("player_attack", damage_current)
