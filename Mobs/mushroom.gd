@@ -3,7 +3,10 @@ extends CharacterBody2D
 enum {
 	IDLE,
 	ATTACK,
-	CHACE
+	CHACE,
+	DAMAGE,
+	DEATH,
+	RECOVER
 }
 
 var state: int = 0:
@@ -14,6 +17,12 @@ var state: int = 0:
 				idle_state()
 			ATTACK:
 				attack_state()
+			DAMAGE:
+				damage_state()
+			DEATH:
+				death_state()
+			RECOVER:
+				recover_state()
 
 @onready var animPlayer = $AnimationPlayer
 @onready var sprite = $AnimatedSprite2D
@@ -22,9 +31,11 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var player
 var direction
 var damage = 20
+var health = 100
 
 func _ready() -> void:
 	Signals.connect("player_position_update", Callable(self, "_on_player_position_update"))
+	Signals.connect("player_attack", Callable(self, "_on_damage_recieved"))
 
 func _physics_process(delta):
 	if not is_on_floor():
@@ -43,14 +54,12 @@ func _on_attack_range_body_entered(_body: Node2D) -> void:
 	
 func idle_state():
 	animPlayer.play("Idle")
-	await get_tree().create_timer(1).timeout
-	$AttacDirection/AttackRange/CollisionShape2D.disabled = false
 	state = CHACE
 	
 func attack_state():
 	animPlayer.play("Attack")
 	await animPlayer.animation_finished
-	$AttacDirection/AttackRange/CollisionShape2D.disabled = true
+	
 	state = IDLE
 
 func chace_state():
@@ -62,9 +71,29 @@ func chace_state():
 		sprite.flip_h = false
 		$AttacDirection.scale.x = 1
 
+func damage_state():
+	animPlayer.play("Damage")
+	await animPlayer.animation_finished
+	state = IDLE
+	
+func death_state():
+	animPlayer.play("Death")
+	await animPlayer.animation_finished
+	queue_free()
 
+func recover_state():
+	animPlayer.play("Recover")
+	await animPlayer.animation_finished
+	state = IDLE
 
-
+func _on_damage_recieved(player_damage):
+	health -= player_damage
+	print(player_damage)
+	if health <=0:
+		state = DEATH
+	else:
+		state = IDLE
+		state = DAMAGE
 
 func _on_hit_box_area_entered(_area: Area2D) -> void:
 	Signals.emit_signal("enemy_atack", damage)

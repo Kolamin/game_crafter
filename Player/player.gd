@@ -92,8 +92,10 @@ func move_state():
 			animPlayer.play("Idle")
 	if direction == -1:
 		anim.flip_h = true
+		$AttackDirection.rotation_degrees = 180
 	elif direction == 1:
 		anim.flip_h = false
+		$AttackDirection.rotation_degrees = 0
 	if Input.is_action_pressed("run"):
 		run_speed = 2
 	else :
@@ -131,6 +133,7 @@ func attack_state():
 	state = MOVE
 	
 func attack2_state():
+	damage_multiplier = 1.2
 	if Input.is_action_just_pressed("attack") and combo == true:
 		state = ATTACK3
 	animPlayer.play("Attack2")
@@ -138,6 +141,7 @@ func attack2_state():
 	state = MOVE
 
 func attack3_state():
+	damage_multiplier = 2
 	animPlayer.play("Attack3")
 	await animPlayer.animation_finished
 	state = MOVE
