@@ -1,7 +1,5 @@
 extends CharacterBody2D
 
-signal health_changed(new_health)
-
 enum {
 	MOVE,
 	ATTACK,
@@ -21,21 +19,22 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 @onready var anim = $AnimatedSprite2D
 @onready var animPlayer = $AnimationPlayer
-var health = 120
+@onready var stats = $Stats
+
 var gold = 0
 var state = MOVE
 var run_speed = 1
 var combo = false
 var attack_cooldown = false
 var player_pos
-var max_health = 100
+
 var damage_basic = 10
 var damage_multiplier = 1
 var damage_current
 
 func _ready() -> void:
 	Signals.connect("enemy_atack", Callable(self, "on_damage_recieved"))
-	health = max_health
+	
 
 func _physics_process(delta):
 	
@@ -169,14 +168,11 @@ func on_damage_recieved(enemy_damage):
 		enemy_damage = 0
 	else:
 		state = DAMAGE
-	health -= enemy_damage
-	if health <= 0:
-		health = 0
+	stats.health -= enemy_damage
+	if stats.health <= 0:
+		stats.health = 0
 		state = DEATH
 	
-	emit_signal("health_changed", health)
-	print(health)
-
-
+	
 func _on_hit_box_area_entered(area: Area2D) -> void:
 	Signals.emit_signal("player_attack", damage_current)

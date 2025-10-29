@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=4 uid="uid://p0pm8y26okus"]
+[gd_scene load_steps=16 format=4 uid="uid://p0pm8y26okus"]
 
 [ext_resource type="Script" uid="uid://bgco1nrsoeeev" path="res://level.gd" id="1_226ms"]
 [ext_resource type="PackedScene" uid="uid://dtctyojgqw6vf" path="res://Player/player.tscn" id="1_701st"]
@@ -7,10 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://5shv84pbrc7f" path="res://oak_woods_v1.0/background/background_layer_3.png" id="4_es4lw"]
 [ext_resource type="Texture2D" uid="uid://cl48cg5igr1jg" path="res://oak_woods_v1.0/oak_woods_tileset.png" id="5_sbhha"]
 [ext_resource type="PackedScene" uid="uid://cqwm8xisglprv" path="res://Build/shop.tscn" id="6_dwfsf"]
-[ext_resource type="Texture2D" uid="uid://m7v8rg36ocgm" path="res://assets/sprites/Sprite-0003.png" id="8_aicyk"]
 [ext_resource type="PackedScene" uid="uid://cxnlx6jgjsagx" path="res://Mobs/mushroom.tscn" id="8_i2t4f"]
-[ext_resource type="Texture2D" uid="uid://djohd1wxwkwms" path="res://assets/sprites/Sprite-0001.png" id="9_8b0r0"]
-[ext_resource type="Texture2D" uid="uid://b4jlloysbfvhs" path="res://assets/sprites/Sprite-0002.png" id="10_h6smj"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_bc8hc"]
 texture = ExtResource("5_sbhha")
@@ -578,20 +575,6 @@ offset_right = 733.0
 offset_bottom = 270.0
 theme_override_font_sizes/font_size = 80
 text = "DAY"
-
-[node name="HealthBar" type="TextureProgressBar" parent="CanvasLayer"]
-modulate = Color(1, 1, 1, 0.6509804)
-offset_left = 11.0
-offset_top = 14.0
-offset_right = 274.0
-offset_bottom = 54.0
-value = 50.0
-nine_patch_stretch = true
-texture_under = ExtResource("8_aicyk")
-texture_over = ExtResource("9_8b0r0")
-texture_progress = ExtResource("10_h6smj")
-tint_over = Color(1, 0.79607844, 0.25882354, 1)
-tint_progress = Color(0.92156863, 0.1764706, 0.28235295, 1)
 
 [node name="Light" type="Node2D" parent="."]
 

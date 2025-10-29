@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://c3ltog7rkhbmd"]
+
+[ext_resource type="Texture2D" uid="uid://m7v8rg36ocgm" path="res://assets/sprites/Sprite-0003.png" id="1_bn8c2"]
+[ext_resource type="Script" uid="uid://c54ba3boieruc" path="res://scn/stats.gd" id="1_ru2oj"]
+[ext_resource type="Texture2D" uid="uid://djohd1wxwkwms" path="res://assets/sprites/Sprite-0001.png" id="2_ru2oj"]
+[ext_resource type="Texture2D" uid="uid://b4jlloysbfvhs" path="res://assets/sprites/Sprite-0002.png" id="3_gos2p"]
+
+[node name="Stats" type="CanvasLayer"]
+script = ExtResource("1_ru2oj")
+
+[node name="HealthBar" type="TextureProgressBar" parent="."]
+modulate = Color(1, 1, 1, 0.6509804)
+offset_left = 11.0
+offset_top = 14.0
+offset_right = 274.0
+offset_bottom = 54.0
+value = 50.0
+nine_patch_stretch = true
+texture_under = ExtResource("1_bn8c2")
+texture_over = ExtResource("2_ru2oj")
+texture_progress = ExtResource("3_gos2p")
+tint_over = Color(1, 0.79607844, 0.25882354, 1)
+tint_progress = Color(0.92156863, 0.1764706, 0.28235295, 1)
