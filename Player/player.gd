@@ -96,7 +96,7 @@ func move_state():
 		anim.flip_h = false
 		$AttackDirection.rotation_degrees = 0
 	if Input.is_action_pressed("run"):
-		run_speed = 2
+		run_speed = 1.5
 	else :
 		run_speed = 1
 	if Input.is_action_pressed("block"):
@@ -105,7 +105,9 @@ func move_state():
 		else:
 			state = SLIDE
 	if Input.is_action_just_pressed("attack") and attack_cooldown == false:
-		state = ATTACK
+		stats.stamina_cost = stats.attack_cost
+		if attack_cooldown == false and stats.stamina > stats.stamina_cost:
+			state = ATTACK
 		
 		
 	
@@ -117,13 +119,15 @@ func block_state():
 		state = MOVE
 
 func slide_state():
+	stats.stamina_cost = stats.slide_cost
 	animPlayer.play("Slide")
 	await animPlayer.animation_finished
 	state = MOVE
 
 func attack_state():
+	stats.stamina_cost = stats.attack_cost
 	damage_multiplier = 1
-	if Input.is_action_just_pressed("attack") and combo == true:
+	if Input.is_action_just_pressed("attack") and combo == true and stats.stamina > stats.stamina_cost:
 		state = ATTACK2
 	velocity.x = 0
 	animPlayer.play("Attack")
@@ -132,14 +136,16 @@ func attack_state():
 	state = MOVE
 	
 func attack2_state():
+	stats.stamina_cost = stats.attack_cost
 	damage_multiplier = 1.2
-	if Input.is_action_just_pressed("attack") and combo == true:
+	if Input.is_action_just_pressed("attack") and combo == true and stats.stamina > stats.stamina_cost:
 		state = ATTACK3
 	animPlayer.play("Attack2")
 	await animPlayer.animation_finished
 	state = MOVE
 
 func attack3_state():
+	
 	damage_multiplier = 2
 	animPlayer.play("Attack3")
 	await animPlayer.animation_finished
