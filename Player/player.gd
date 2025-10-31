@@ -99,11 +99,18 @@ func move_state():
 		run_speed = 1.5
 	else :
 		run_speed = 1
+		
 	if Input.is_action_pressed("block"):
+		stats.stamina_cost = stats.slide_cost
 		if velocity.x == 0:
 			state = BLOCK
 		else:
-			state = SLIDE
+			stats.stamina_cost = stats.slide_cost
+			if stats.stamina > stats.stamina_cost:
+				state = SLIDE
+			
+		
+		
 	if Input.is_action_just_pressed("attack") and attack_cooldown == false:
 		stats.stamina_cost = stats.attack_cost
 		if attack_cooldown == false and stats.stamina > stats.stamina_cost:
@@ -112,14 +119,12 @@ func move_state():
 		
 	
 func block_state():
-	
 	velocity.x = 0
 	animPlayer.play("Block")
 	if Input.is_action_just_released("block"):
 		state = MOVE
 
 func slide_state():
-	stats.stamina_cost = stats.slide_cost
 	animPlayer.play("Slide")
 	await animPlayer.animation_finished
 	state = MOVE
