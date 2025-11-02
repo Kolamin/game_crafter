@@ -1123,7 +1123,7 @@ shape = SubResource("CapsuleShape2D_8wh20")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(3, -13)
 sprite_frames = SubResource("SpriteFrames_ttctl")
-animation = &"Slide"
+animation = &"Attack"
 autoplay = "Idle"
 
 [node name="Camera2D" type="Camera2D" parent="."]
@@ -1170,5 +1170,6 @@ shape = SubResource("CircleShape2D_fhl08")
 [node name="Stats" parent="." instance=ExtResource("7_vtle1")]
 
 [connection signal="area_entered" from="AttackDirection/DamageBox/HitBox" to="." method="_on_hit_box_area_entered"]
+[connection signal="no_stamina" from="Stats" to="." method="_on_stats_no_stamina"]
 
 [editable path="AttackDirection/DamageBox"]

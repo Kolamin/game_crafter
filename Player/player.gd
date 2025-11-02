@@ -31,6 +31,7 @@ var player_pos
 var damage_basic = 10
 var damage_multiplier = 1
 var damage_current
+var recovery = false
 
 func _ready() -> void:
 	Signals.connect("enemy_atack", Callable(self, "on_damage_recieved"))
@@ -95,8 +96,9 @@ func move_state():
 	elif direction == 1:
 		anim.flip_h = false
 		$AttackDirection.rotation_degrees = 0
-	if Input.is_action_pressed("run"):
+	if Input.is_action_pressed("run") and not recovery:
 		run_speed = 1.5
+		stats.stamina -= stats.run_cost
 	else :
 		run_speed = 1
 		
@@ -112,16 +114,17 @@ func move_state():
 		
 		
 	if Input.is_action_just_pressed("attack") and attack_cooldown == false:
-		stats.stamina_cost = stats.attack_cost
-		if attack_cooldown == false and stats.stamina > stats.stamina_cost:
-			state = ATTACK
+		if recovery == false:
+			stats.stamina_cost = stats.attack_cost
+			if attack_cooldown == false and stats.stamina > stats.stamina_cost:
+				state = ATTACK
 		
 		
 	
 func block_state():
 	velocity.x = 0
 	animPlayer.play("Block")
-	if Input.is_action_just_released("block"):
+	if Input.is_action_just_released("block") or recovery:
 		state = MOVE
 
 func slide_state():
@@ -187,3 +190,9 @@ func on_damage_recieved(enemy_damage):
 	
 func _on_hit_box_area_entered(area: Area2D) -> void:
 	Signals.emit_signal("player_attack", damage_current)
+
+
+func _on_stats_no_stamina() -> void:
+	recovery = true
+	await get_tree().create_timer(2).timeout
+	recovery = false
