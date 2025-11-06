@@ -1,4 +1,4 @@
-[gd_scene load_steps=105 format=3 uid="uid://dtctyojgqw6vf"]
+[gd_scene load_steps=109 format=3 uid="uid://dtctyojgqw6vf"]
 
 [ext_resource type="Texture2D" uid="uid://bpwxx0xn0lilc" path="res://oak_woods_v1.0/character/char_blue.png" id="1_qxhrb"]
 [ext_resource type="Script" uid="uid://caycwn6hpygah" path="res://Player/player.gd" id="1_u8cre"]
@@ -1112,6 +1112,96 @@ polygon = PackedVector2Array(-5, 13, -6, 15, 11, 15, 10, 13)
 [sub_resource type="CircleShape2D" id="CircleShape2D_fhl08"]
 radius = 8.0
 
+[sub_resource type="Animation" id="Animation_vtle1"]
+resource_name = "damage_recieved"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("HealthText:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-20, -28), Vector2(-20, -37)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("HealthText:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(0.9372549, 0.25882354, 0.28627452, 1), Color(0.9372549, 0.25882354, 0.28627452, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_od3ui"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("HealthText:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-20, -28)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("HealthText:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_00tjw"]
+resource_name = "health_recived"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("HealthText:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-20, -28), Vector2(-20, -37)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("HealthText:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(0.35502866, 0.6246662, 0.2203246, 1), Color(0.35686275, 0.62352943, 0.21960784, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_00tjw"]
+_data = {
+&"RESET": SubResource("Animation_od3ui"),
+&"damage_recieved": SubResource("Animation_vtle1"),
+&"health_recived": SubResource("Animation_00tjw")
+}
+
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 2
 script = ExtResource("1_u8cre")
@@ -1168,6 +1258,20 @@ collision_mask = 32
 shape = SubResource("CircleShape2D_fhl08")
 
 [node name="Stats" parent="." instance=ExtResource("7_vtle1")]
+
+[node name="HealthText" type="Label" parent="."]
+offset_left = -20.0
+offset_top = -28.0
+offset_right = 20.0
+offset_bottom = -5.0
+theme_override_font_sizes/font_size = 8
+text = "20"
+horizontal_alignment = 1
+
+[node name="HealthAnim" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_00tjw")
+}
 
 [connection signal="area_entered" from="AttackDirection/DamageBox/HitBox" to="." method="_on_hit_box_area_entered"]
 [connection signal="no_stamina" from="Stats" to="." method="_on_stats_no_stamina"]
