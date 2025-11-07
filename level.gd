@@ -2,8 +2,10 @@ extends Node2D
 
 @onready var light_animation = $Light/LightAnimation
 @onready var day_text = $CanvasLayer/DayText
-
 @onready var player = $Player/Player
+
+var mushroom_preload = preload("res://Mobs/mushroom.tscn")
+
 enum {
 	MONING,
 	DAY,
@@ -45,3 +47,12 @@ func _on_day_night_timeout() -> void:
 
 func set_day_text():
 	day_text.text = "DAY " + str(day_count)
+
+
+func _on_spawner_timeout() -> void:
+	mushroom_spawn()
+
+func mushroom_spawn():
+	var mushroom = mushroom_preload.instantiate()
+	mushroom.position = Vector2(randi_range(-500, -200), 480)
+	$Mobs.add_child(mushroom)

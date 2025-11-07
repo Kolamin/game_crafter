@@ -1112,6 +1112,33 @@ polygon = PackedVector2Array(-5, 13, -6, 15, 11, 15, 10, 13)
 [sub_resource type="CircleShape2D" id="CircleShape2D_fhl08"]
 radius = 8.0
 
+[sub_resource type="Animation" id="Animation_od3ui"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("HealthText:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-20, -28)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("HealthText:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
 [sub_resource type="Animation" id="Animation_vtle1"]
 resource_name = "damage_recieved"
 length = 0.4
@@ -1138,33 +1165,6 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Color(0.9372549, 0.25882354, 0.28627452, 1), Color(0.9372549, 0.25882354, 0.28627452, 1), Color(1, 1, 1, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_od3ui"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("HealthText:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(-20, -28)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("HealthText:modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_00tjw"]
@@ -1251,7 +1251,7 @@ collision_mask = 0
 position = Vector2(4, 0)
 
 [node name="HitBox" parent="AttackDirection/DamageBox" index="1"]
-collision_layer = 0
+collision_layer = 64
 collision_mask = 32
 
 [node name="CollisionShape2D" parent="AttackDirection/DamageBox/HitBox" index="0"]
