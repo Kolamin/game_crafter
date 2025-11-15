@@ -26,7 +26,7 @@ var state = MOVE
 var run_speed = 1
 var combo = false
 var attack_cooldown = false
-var player_pos
+
 
 var damage_basic = 10
 var damage_multiplier = 1
@@ -46,7 +46,7 @@ func _physics_process(delta):
 	if velocity.y > 0:
 		animPlayer.play("Fall")
 	
-	damage_current = damage_basic * damage_multiplier
+	Global.player_damage = damage_basic * damage_multiplier
 	
 	match state:
 		MOVE:
@@ -67,8 +67,8 @@ func _physics_process(delta):
 			death_state()
 		
 	move_and_slide()
-	player_pos = self.position
-	Signals.emit_signal("player_position_update", player_pos)
+	Global.player_pos = self.position
+	#Signals.emit_signal("player_position_update", Global.player_pos)
 	
 func death_state():
 	velocity.x = 0
@@ -188,8 +188,7 @@ func on_damage_recieved(enemy_damage):
 		state = DEATH
 	
 	
-func _on_hit_box_area_entered(area: Area2D) -> void:
-	Signals.emit_signal("player_attack", damage_current)
+
 
 
 func _on_stats_no_stamina() -> void:

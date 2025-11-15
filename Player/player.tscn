@@ -1273,7 +1273,6 @@ libraries = {
 &"": SubResource("AnimationLibrary_00tjw")
 }
 
-[connection signal="area_entered" from="AttackDirection/DamageBox/HitBox" to="." method="_on_hit_box_area_entered"]
 [connection signal="no_stamina" from="Stats" to="." method="_on_stats_no_stamina"]
 
 [editable path="AttackDirection/DamageBox"]

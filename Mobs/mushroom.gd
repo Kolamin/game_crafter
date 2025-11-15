@@ -32,9 +32,6 @@ var player
 var direction
 var damage = 20
 
-
-func _ready() -> void:
-	Signals.connect("player_position_update", Callable(self, "_on_player_position_update"))
 	
 
 func _physics_process(delta):
@@ -45,8 +42,7 @@ func _physics_process(delta):
 		chace_state()
 	move_and_slide()
 
-func _on_player_position_update(player_pos):
-	player = player_pos
+	player = Global.player_pos
 
 
 func _on_attack_range_body_entered(_body: Node2D) -> void:

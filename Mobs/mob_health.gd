@@ -7,7 +7,6 @@ signal damage_recieved()
 @onready var damage_text = $DamageText
 @onready var animPlayer = $AnimationPlayer
 
-var player_dmg
 
 var health = 100:
 	set(value):
@@ -19,19 +18,16 @@ var health = 100:
 			health_bar.visible = true
 
 func _ready() -> void:
-	Signals.connect("player_attack", Callable(self, "_on_damage_recieved"))
 	damage_text.modulate.a = 0
 	health_bar.max_value = health
 	health_bar.visible = false
 	
-func _on_damage_recieved(player_damage):
-	player_dmg = player_damage
 
 
-func _on_hurt_box_area_entered(area: Area2D) -> void:
+func _on_hurt_box_area_entered(_area: Area2D) -> void:
 	await get_tree().create_timer(0.05).timeout
-	health -= player_dmg
-	damage_text.text = str(player_dmg)
+	health -= Global.player_damage
+	damage_text.text = str(Global.player_damage)
 	animPlayer.stop()
 	animPlayer.play("damage_text")
 	if health <=0:
