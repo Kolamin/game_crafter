@@ -68,6 +68,7 @@ func chace_state():
 		$AttacDirection.scale.x = 1
 
 func damage_state():
+	damage_anim()
 	animPlayer.play("Damage")
 	await animPlayer.animation_finished
 	state = IDLE
@@ -95,3 +96,13 @@ func _on_mob_health_no_health() -> void:
 func _on_mob_health_damage_recieved() -> void:
 	state = IDLE
 	state = DAMAGE
+	
+func damage_anim():
+	direction = (player - self.position).normalized()
+	velocity.x = 0
+	if direction.x < 0:
+		velocity.x += 200
+	elif direction.x > 0:
+		velocity.x -= 200
+	var tween = get_tree().create_tween()
+	tween.parallel().tween_property(self, "velocity", Vector2.ZERO, 0.1)

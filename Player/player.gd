@@ -170,7 +170,7 @@ func attack_freeze():
 	attack_cooldown = false
 
 func damage_state():
-	velocity.x = 0
+	
 	anim.play("Damage")
 	await anim.animation_finished
 	state = MOVE
@@ -182,16 +182,26 @@ func on_damage_recieved(enemy_damage):
 		enemy_damage = 0
 	else:
 		state = DAMAGE
+		damage_anim()
 	stats.health -= enemy_damage
 	if stats.health <= 0:
 		stats.health = 0
 		state = DEATH
 	
-	
-
-
 
 func _on_stats_no_stamina() -> void:
 	recovery = true
 	await get_tree().create_timer(2).timeout
 	recovery = false
+	
+func damage_anim():
+	velocity.x = 0
+	self.modulate = Color(1, 0, 0,1)
+	if $AnimatedSprite2D.flip_h == true:
+		velocity.x += 200
+	else:
+		velocity.x -= 200
+	var tween = get_tree().create_tween()
+	tween.parallel().tween_property(self, "velocity", Vector2.ZERO, 0.1)
+	tween.parallel().tween_property(self, "modulate", Color(1,1,1,1), 0.1)
+	
