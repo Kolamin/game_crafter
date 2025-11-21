@@ -1,12 +1,14 @@
-[gd_scene load_steps=15 format=4 uid="uid://p0pm8y26okus"]
+[gd_scene load_steps=17 format=4 uid="uid://p0pm8y26okus"]
 
 [ext_resource type="Script" uid="uid://bgco1nrsoeeev" path="res://level.gd" id="1_226ms"]
 [ext_resource type="PackedScene" uid="uid://dtctyojgqw6vf" path="res://Player/player.tscn" id="1_701st"]
+[ext_resource type="Script" uid="uid://bv78vbibgughh" path="res://manager.gd" id="2_i2t4f"]
 [ext_resource type="Texture2D" uid="uid://3deih6mi80mu" path="res://oak_woods_v1.0/background/background_layer_1.png" id="2_ncpa6"]
 [ext_resource type="Texture2D" uid="uid://iow76e7dkm1s" path="res://oak_woods_v1.0/background/background_layer_2.png" id="3_daj6w"]
 [ext_resource type="Texture2D" uid="uid://5shv84pbrc7f" path="res://oak_woods_v1.0/background/background_layer_3.png" id="4_es4lw"]
 [ext_resource type="Texture2D" uid="uid://cl48cg5igr1jg" path="res://oak_woods_v1.0/oak_woods_tileset.png" id="5_sbhha"]
 [ext_resource type="PackedScene" uid="uid://cqwm8xisglprv" path="res://Build/shop.tscn" id="6_dwfsf"]
+[ext_resource type="PackedScene" uid="uid://bnckih7k2s31l" path="res://scn/ui/pause_menu.tscn" id="8_8cye3"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_bc8hc"]
 texture = ExtResource("5_sbhha")
@@ -510,6 +512,10 @@ _data = {
 [node name="Level" type="Node2D"]
 script = ExtResource("1_226ms")
 
+[node name="Manager" type="Node" parent="."]
+process_mode = 3
+script = ExtResource("2_i2t4f")
+
 [node name="BG" type="ParallaxBackground" parent="."]
 layer = -1
 offset = Vector2(0, 250)
@@ -576,6 +582,30 @@ offset_bottom = 270.0
 theme_override_font_sizes/font_size = 80
 text = "DAY"
 
+[node name="PauseMenu" parent="CanvasLayer" instance=ExtResource("8_8cye3")]
+process_mode = 2
+
+[node name="Save" parent="CanvasLayer/PauseMenu/Panel/VBoxContainer" index="1"]
+text = "Save"
+
+[node name="Load" parent="CanvasLayer/PauseMenu/Panel/VBoxContainer" index="2"]
+text = "Load"
+
+[node name="Quit" parent="CanvasLayer/PauseMenu/Panel/VBoxContainer" index="3"]
+text = "Quit"
+
+[node name="MenuButton" type="Button" parent="CanvasLayer"]
+process_mode = 3
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -52.0
+offset_top = 5.0
+offset_right = -6.0
+offset_bottom = 21.0
+grow_horizontal = 0
+text = "menu"
+
 [node name="Light" type="Node2D" parent="."]
 
 [node name="Sun" type="DirectionalLight2D" parent="Light"]
@@ -601,4 +631,9 @@ libraries = {
 position = Vector2(178, 551)
 
 [connection signal="timeout" from="Mobs/Spawner" to="." method="_on_spawner_timeout"]
+[connection signal="pressed" from="CanvasLayer/PauseMenu/Panel/VBoxContainer/Resume" to="Manager" method="_on_resume_pressed"]
+[connection signal="pressed" from="CanvasLayer/PauseMenu/Panel/VBoxContainer/Quit" to="Manager" method="_on_quit_pressed"]
+[connection signal="pressed" from="CanvasLayer/MenuButton" to="Manager" method="_on_menu_button_pressed"]
 [connection signal="timeout" from="Light/DayNight" to="." method="_on_day_night_timeout"]
+
+[editable path="CanvasLayer/PauseMenu"]
