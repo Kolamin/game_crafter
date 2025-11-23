@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=4 uid="uid://p0pm8y26okus"]
+[gd_scene load_steps=19 format=4 uid="uid://p0pm8y26okus"]
 
 [ext_resource type="Script" uid="uid://bgco1nrsoeeev" path="res://level.gd" id="1_226ms"]
 [ext_resource type="PackedScene" uid="uid://dtctyojgqw6vf" path="res://Player/player.tscn" id="1_701st"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://cl48cg5igr1jg" path="res://oak_woods_v1.0/oak_woods_tileset.png" id="5_sbhha"]
 [ext_resource type="PackedScene" uid="uid://cqwm8xisglprv" path="res://Build/shop.tscn" id="6_dwfsf"]
 [ext_resource type="PackedScene" uid="uid://bnckih7k2s31l" path="res://scn/ui/pause_menu.tscn" id="8_8cye3"]
+[ext_resource type="Script" uid="uid://bp0b8ju6ri8es" path="res://collectibles.gd" id="10_2orkt"]
 [ext_resource type="PackedScene" uid="uid://cs8q7iraccbtr" path="res://scn/collectibles/coin.tscn" id="10_8cye3"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_bc8hc"]
@@ -632,6 +633,7 @@ libraries = {
 position = Vector2(178, 551)
 
 [node name="Collectibles" type="Node2D" parent="."]
+script = ExtResource("10_2orkt")
 
 [node name="Coin" parent="Collectibles" instance=ExtResource("10_8cye3")]
 position = Vector2(216, 556)
