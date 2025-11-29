@@ -28,6 +28,10 @@ version_control/autoload_on_startup=true
 
 enabled=PackedStringArray("res://addons/AS2P/plugin.cfg")
 
+[gui]
+
+theme/custom="uid://b464p7re0ctjt"
+
 [input]
 
 left={

@@ -408,6 +408,18 @@ tracks/2/keys = {
 "update": 0,
 "values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("AttacDirection/DamageBox/HitBox/CollisionShape2D:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="Animation" id="Animation_gx20p"]
 length = 0.5
@@ -566,7 +578,7 @@ _data = {
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_selrt"]
-size = Vector2(16, 17)
+size = Vector2(17, 16)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ufykn"]
 radius = 8.0
@@ -582,7 +594,7 @@ shape = SubResource("CapsuleShape2D_wr5pi")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_mcfeu")
-animation = &"Damage"
+animation = &"Death"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -597,7 +609,7 @@ collision_layer = 0
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttacDirection/AttackRange"]
-position = Vector2(16, 9)
+position = Vector2(15.5, 10)
 shape = SubResource("RectangleShape2D_selrt")
 
 [node name="DamageBox" parent="AttacDirection" instance=ExtResource("7_ufykn")]
@@ -615,7 +627,7 @@ collision_layer = 0
 collision_mask = 16
 
 [node name="CollisionShape2D" parent="AttacDirection/DamageBox/HitBox" index="0"]
-position = Vector2(16, 5)
+position = Vector2(17, 5)
 shape = SubResource("CircleShape2D_ufykn")
 
 [node name="MobHealth" parent="." instance=ExtResource("8_xshu0")]
