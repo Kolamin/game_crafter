@@ -17,8 +17,8 @@ var state: int = MONING
 var day_count: int
 
 func  _ready() -> void:
+	Global.gold = 0
 	day_count = 0
-	
 	moning_state()
 
 	

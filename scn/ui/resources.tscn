@@ -1,5 +1,6 @@
-[gd_scene load_steps=6 format=3 uid="uid://c7k3j4wcxprgi"]
+[gd_scene load_steps=7 format=3 uid="uid://c7k3j4wcxprgi"]
 
+[ext_resource type="Script" uid="uid://bnffyuytss3ih" path="res://scn/ui/resources.gd" id="1_0dv8g"]
 [ext_resource type="Texture2D" uid="uid://bdc5rbx0v34og" path="res://assets/sprites/Gold.png" id="1_3pme1"]
 [ext_resource type="Texture2D" uid="uid://bfbkvnf1lvgqo" path="res://assets/sprites/Food_Icon.png" id="2_0dv8g"]
 [ext_resource type="Texture2D" uid="uid://cpwn5ngkfwkui" path="res://assets/sprites/Wood_Icon.png" id="3_fqpi4"]
@@ -8,6 +9,7 @@
 [sub_resource type="Theme" id="Theme_3pme1"]
 
 [node name="Resources" type="CanvasLayer"]
+script = ExtResource("1_0dv8g")
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3

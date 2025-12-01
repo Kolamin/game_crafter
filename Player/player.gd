@@ -21,7 +21,6 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 @onready var animPlayer = $AnimationPlayer
 @onready var stats = $Stats
 
-var gold = 0
 var state = MOVE
 var run_speed = 1
 var combo = false

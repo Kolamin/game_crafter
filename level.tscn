@@ -574,6 +574,7 @@ wait_time = 5.0
 autostart = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 2
 
 [node name="DayText" type="Label" parent="CanvasLayer"]
 modulate = Color(1, 1, 1, 0)
@@ -640,6 +641,8 @@ position = Vector2(216, 556)
 
 [connection signal="timeout" from="Mobs/Spawner" to="." method="_on_spawner_timeout"]
 [connection signal="pressed" from="CanvasLayer/PauseMenu/Panel/VBoxContainer/Resume" to="Manager" method="_on_resume_pressed"]
+[connection signal="pressed" from="CanvasLayer/PauseMenu/Panel/VBoxContainer/Save" to="Manager" method="_on_save_pressed"]
+[connection signal="pressed" from="CanvasLayer/PauseMenu/Panel/VBoxContainer/Load" to="Manager" method="_on_load_pressed"]
 [connection signal="pressed" from="CanvasLayer/PauseMenu/Panel/VBoxContainer/Quit" to="Manager" method="_on_quit_pressed"]
 [connection signal="pressed" from="CanvasLayer/MenuButton" to="Manager" method="_on_menu_button_pressed"]
 [connection signal="timeout" from="Light/DayNight" to="." method="_on_day_night_timeout"]
