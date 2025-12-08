@@ -1,6 +1,7 @@
-[gd_scene load_steps=10 format=3 uid="uid://cqwm8xisglprv"]
+[gd_scene load_steps=11 format=3 uid="uid://cqwm8xisglprv"]
 
 [ext_resource type="Texture2D" uid="uid://ua00tpghhhk8" path="res://oak_woods_v1.0/decorations/shop_anim.png" id="1_cmmdy"]
+[ext_resource type="PackedScene" uid="uid://bmcwndte0kqlx" path="res://scn/light/lantern.tscn" id="2_jxx1l"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_n8j4d"]
 radius = 30.0832
@@ -67,3 +68,11 @@ sprite_frames = SubResource("SpriteFrames_ggi6w")
 autoplay = "default"
 frame = 3
 frame_progress = 0.826542
+
+[node name="Lantern" parent="." instance=ExtResource("2_jxx1l")]
+position = Vector2(49, 2)
+
+[node name="Lantern2" parent="." instance=ExtResource("2_jxx1l")]
+position = Vector2(-47, 3)
+color = Color(0.96984106, 0.75025403, 0.458664, 1)
+energy = 1.5

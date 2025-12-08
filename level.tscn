@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=4 uid="uid://p0pm8y26okus"]
+[gd_scene load_steps=21 format=4 uid="uid://p0pm8y26okus"]
 
 [ext_resource type="Script" uid="uid://bgco1nrsoeeev" path="res://level.gd" id="1_226ms"]
 [ext_resource type="PackedScene" uid="uid://dtctyojgqw6vf" path="res://Player/player.tscn" id="1_701st"]
@@ -8,6 +8,8 @@
 [ext_resource type="Texture2D" uid="uid://5shv84pbrc7f" path="res://oak_woods_v1.0/background/background_layer_3.png" id="4_es4lw"]
 [ext_resource type="Texture2D" uid="uid://cl48cg5igr1jg" path="res://oak_woods_v1.0/oak_woods_tileset.png" id="5_sbhha"]
 [ext_resource type="PackedScene" uid="uid://cqwm8xisglprv" path="res://Build/shop.tscn" id="6_dwfsf"]
+[ext_resource type="Texture2D" uid="uid://be7feys16l8b2" path="res://oak_woods_v1.0/decorations/lamp.png" id="7_aicyk"]
+[ext_resource type="PackedScene" uid="uid://bmcwndte0kqlx" path="res://scn/light/lantern.tscn" id="8_8b0r0"]
 [ext_resource type="PackedScene" uid="uid://bnckih7k2s31l" path="res://scn/ui/pause_menu.tscn" id="8_8cye3"]
 [ext_resource type="Script" uid="uid://bp0b8ju6ri8es" path="res://collectibles.gd" id="10_2orkt"]
 [ext_resource type="PackedScene" uid="uid://cs8q7iraccbtr" path="res://scn/collectibles/coin.tscn" id="10_8cye3"]
@@ -550,8 +552,18 @@ position = Vector2(574.5, 327)
 scale = Vector2(3.60313, 3.57778)
 texture = ExtResource("4_es4lw")
 
-[node name="Shop" parent="." instance=ExtResource("6_dwfsf")]
+[node name="Buildings" type="Node" parent="."]
+
+[node name="Shop" parent="Buildings" instance=ExtResource("6_dwfsf")]
 position = Vector2(83, 537)
+
+[node name="Lamp" type="Sprite2D" parent="Buildings"]
+position = Vector2(248, 539)
+texture = ExtResource("7_aicyk")
+
+[node name="Lantern" parent="Buildings/Lamp" instance=ExtResource("8_8b0r0")]
+position = Vector2(-6, -6)
+scale = Vector2(0.135, 0.135)
 
 [node name="TileMap" type="TileMap" parent="."]
 position = Vector2(2, 9)

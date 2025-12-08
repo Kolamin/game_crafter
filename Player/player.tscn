@@ -4,9 +4,9 @@
 [ext_resource type="Script" uid="uid://caycwn6hpygah" path="res://Player/player.gd" id="1_u8cre"]
 [ext_resource type="Texture2D" uid="uid://cmwlv1htvgmlg" path="res://oak_woods_v1.0/character/blue/char_blue_1.png" id="2_smq6x"]
 [ext_resource type="Texture2D" uid="uid://cu3x5nwgjf81w" path="res://oak_woods_v1.0/character/blue/char_blue_2.png" id="3_6k5n5"]
-[ext_resource type="Texture2D" uid="uid://gxsmfn8x671q" path="res://oak_woods_v1.0/decorations/circle.png" id="5_k53q1"]
 [ext_resource type="PackedScene" uid="uid://koto5xn15icb" path="res://scn/damageBox/damage_box.tscn" id="6_fhl08"]
 [ext_resource type="PackedScene" uid="uid://c3ltog7rkhbmd" path="res://scn/stats.tscn" id="7_vtle1"]
+[ext_resource type="PackedScene" uid="uid://bmcwndte0kqlx" path="res://scn/light/lantern.tscn" id="8_00tjw"]
 [ext_resource type="PackedScene" uid="uid://c7k3j4wcxprgi" path="res://scn/ui/resources.tscn" id="8_od3ui"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_8wh20"]
@@ -1243,12 +1243,6 @@ libraries = {
 &"": SubResource("AnimationLibrary_irq80")
 }
 
-[node name="PointLight2D" type="PointLight2D" parent="."]
-position = Vector2(1, -6)
-scale = Vector2(0.05625, 0.05625)
-energy = 1.41
-texture = ExtResource("5_k53q1")
-
 [node name="LightOccluder2D" type="LightOccluder2D" parent="."]
 occluder = SubResource("OccluderPolygon2D_k53q1")
 
@@ -1287,6 +1281,9 @@ libraries = {
 }
 
 [node name="Resources" parent="." instance=ExtResource("8_od3ui")]
+
+[node name="Lantern" parent="." instance=ExtResource("8_00tjw")]
+scale = Vector2(0.0925, 0.0925)
 
 [connection signal="no_stamina" from="Stats" to="." method="_on_stats_no_stamina"]
 
