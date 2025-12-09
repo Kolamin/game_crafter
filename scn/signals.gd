@@ -4,3 +4,5 @@ extends Node
 signal enemy_atack(enemy_damage)
 
 signal enemy_died(enemy_position)
+
+signal day_time(state)

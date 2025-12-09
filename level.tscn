@@ -552,7 +552,7 @@ position = Vector2(574.5, 327)
 scale = Vector2(3.60313, 3.57778)
 texture = ExtResource("4_es4lw")
 
-[node name="Buildings" type="Node" parent="."]
+[node name="Buildings" type="Node2D" parent="."]
 
 [node name="Shop" parent="Buildings" instance=ExtResource("6_dwfsf")]
 position = Vector2(83, 537)
