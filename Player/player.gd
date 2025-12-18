@@ -20,6 +20,7 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 @onready var anim = $AnimatedSprite2D
 @onready var animPlayer = $AnimationPlayer
 @onready var stats = $Stats
+@onready var leafs: GPUParticles2D = $Leafs
 
 var state = MOVE
 var run_speed = 1
@@ -203,4 +204,8 @@ func damage_anim():
 	var tween = get_tree().create_tween()
 	tween.parallel().tween_property(self, "velocity", Vector2.ZERO, 0.1)
 	tween.parallel().tween_property(self, "modulate", Color(1,1,1,1), 0.1)
+
+func steps():
+	leafs.emitting = true
+	leafs.one_shot = true
 	

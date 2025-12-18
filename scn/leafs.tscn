@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://baanm1hbv81c3"]
 
-[ext_resource type="Texture2D" uid="uid://bx2s8bwk4wbtx" path="res://assets/sprites/leaf.png" id="1_btubn"]
+[ext_resource type="Texture2D" uid="uid://bx2s8bwk4wbtx" path="res://assets/sprites/leaf.png" id="1_bv8a0"]
 
 [sub_resource type="Gradient" id="Gradient_rgw74"]
 colors = PackedColorArray(0.105882354, 0.105882354, 0.105882354, 0.1764706, 1, 1, 1, 1)
@@ -26,17 +26,22 @@ curve = SubResource("Curve_x3s58")
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_hwhu5"]
 particle_flag_disable_z = true
 emission_shape = 3
-emission_box_extents = Vector3(20, 1, 1)
+emission_box_extents = Vector3(5, 1, 1)
 direction = Vector3(1, -1, 0)
-initial_velocity_min = 25.0
-initial_velocity_max = 50.0
+initial_velocity_min = 10.0
+initial_velocity_max = 20.0
 angular_velocity_min = -1.6093254e-05
 angular_velocity_max = 193.84998
-gravity = Vector3(0, 50, 0)
+gravity = Vector3(0, 20, 0)
 tangential_accel_curve = SubResource("CurveTexture_sh26v")
+scale_min = 0.099999994
+scale_max = 0.29999998
 scale_curve = SubResource("CurveTexture_yatnc")
 color_ramp = SubResource("GradientTexture1D_ik54w")
+hue_variation_min = -2.2351742e-08
+hue_variation_max = 0.16999997
 
-[node name="GPUParticles2D" type="GPUParticles2D"]
-texture = ExtResource("1_btubn")
+[node name="Leafs" type="GPUParticles2D"]
+amount = 6
+texture = ExtResource("1_bv8a0")
 process_material = SubResource("ParticleProcessMaterial_hwhu5")

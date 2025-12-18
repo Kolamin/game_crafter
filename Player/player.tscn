@@ -1,4 +1,4 @@
-[gd_scene load_steps=110 format=3 uid="uid://dtctyojgqw6vf"]
+[gd_scene load_steps=111 format=3 uid="uid://dtctyojgqw6vf"]
 
 [ext_resource type="Texture2D" uid="uid://bpwxx0xn0lilc" path="res://oak_woods_v1.0/character/char_blue.png" id="1_qxhrb"]
 [ext_resource type="Script" uid="uid://caycwn6hpygah" path="res://Player/player.gd" id="1_u8cre"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://c3ltog7rkhbmd" path="res://scn/stats.tscn" id="7_vtle1"]
 [ext_resource type="PackedScene" uid="uid://bmcwndte0kqlx" path="res://scn/light/lantern.tscn" id="8_00tjw"]
 [ext_resource type="PackedScene" uid="uid://c7k3j4wcxprgi" path="res://scn/ui/resources.tscn" id="8_od3ui"]
+[ext_resource type="PackedScene" uid="uid://baanm1hbv81c3" path="res://scn/leafs.tscn" id="9_00tjw"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_8wh20"]
 
@@ -1033,6 +1034,23 @@ tracks/1/keys = {
 "update": 1,
 "values": ["Run"]
 }
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.2, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"steps"
+}, {
+"args": [],
+"method": &"steps"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_bc7nc"]
 length = 0.8
@@ -1226,7 +1244,7 @@ shape = SubResource("CapsuleShape2D_8wh20")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(3, -13)
 sprite_frames = SubResource("SpriteFrames_ttctl")
-animation = &"Damage"
+animation = &"Run"
 autoplay = "Idle"
 
 [node name="Camera2D" type="Camera2D" parent="."]
@@ -1284,6 +1302,10 @@ libraries = {
 
 [node name="Lantern" parent="." instance=ExtResource("8_00tjw")]
 scale = Vector2(0.0925, 0.0925)
+
+[node name="Leafs" parent="." instance=ExtResource("9_00tjw")]
+position = Vector2(0, 13)
+emitting = false
 
 [connection signal="no_stamina" from="Stats" to="." method="_on_stats_no_stamina"]
 

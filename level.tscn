@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=4 uid="uid://p0pm8y26okus"]
+[gd_scene load_steps=27 format=4 uid="uid://p0pm8y26okus"]
 
 [ext_resource type="Script" uid="uid://bgco1nrsoeeev" path="res://level.gd" id="1_226ms"]
 [ext_resource type="PackedScene" uid="uid://dtctyojgqw6vf" path="res://Player/player.tscn" id="1_701st"]
@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://bnckih7k2s31l" path="res://scn/ui/pause_menu.tscn" id="8_8cye3"]
 [ext_resource type="Script" uid="uid://bp0b8ju6ri8es" path="res://collectibles.gd" id="10_2orkt"]
 [ext_resource type="PackedScene" uid="uid://cs8q7iraccbtr" path="res://scn/collectibles/coin.tscn" id="10_8cye3"]
+[ext_resource type="Texture2D" uid="uid://doe15el78krry" path="res://assets/sprites/spotlight_6.png" id="14_h6smj"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_bc8hc"]
 texture = ExtResource("5_sbhha")
@@ -513,6 +514,36 @@ _data = {
 &"sunset": SubResource("Animation_h6smj")
 }
 
+[sub_resource type="Gradient" id="Gradient_v5j5c"]
+offsets = PackedFloat32Array(0, 0.5141243, 1)
+colors = PackedColorArray(0.9490196, 0.9490196, 0.9490196, 0.21960784, 0.972549, 0.972549, 0.972549, 0.9607843, 1, 1, 1, 0.16470589)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_5pxul"]
+gradient = SubResource("Gradient_v5j5c")
+
+[sub_resource type="Curve" id="Curve_fedht"]
+_data = [Vector2(0.0049261153, 0.41573036), 0.0, 0.0, 0, 0, Vector2(0.46305418, 0.9550562), 0.0, 0.0, 0, 0, Vector2(0.99014777, 0.11235964), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_4c15r"]
+curve = SubResource("Curve_fedht")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ait7k"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(100, 100, 1)
+direction = Vector3(1, -1, 0)
+spread = 180.0
+initial_velocity_min = 0.099999994
+initial_velocity_max = 0.29999998
+gravity = Vector3(0, 0, 0)
+scale_min = 0.099999994
+scale_max = 0.5
+scale_curve = SubResource("CurveTexture_4c15r")
+color_ramp = SubResource("GradientTexture1D_5pxul")
+hue_variation_min = -2.2351742e-08
+hue_variation_max = 0.21999997
+
 [node name="Level" type="Node2D"]
 script = ExtResource("1_226ms")
 
@@ -650,6 +681,14 @@ script = ExtResource("10_2orkt")
 
 [node name="Coin" parent="Collectibles" instance=ExtResource("10_8cye3")]
 position = Vector2(216, 556)
+
+[node name="dust" type="GPUParticles2D" parent="."]
+position = Vector2(-25, 21.000008)
+scale = Vector2(50.16, 5.9200006)
+amount = 500
+texture = ExtResource("14_h6smj")
+lifetime = 5.0
+process_material = SubResource("ParticleProcessMaterial_ait7k")
 
 [connection signal="timeout" from="Mobs/Spawner" to="." method="_on_spawner_timeout"]
 [connection signal="pressed" from="CanvasLayer/PauseMenu/Panel/VBoxContainer/Resume" to="Manager" method="_on_resume_pressed"]
