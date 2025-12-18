@@ -1,0 +1,42 @@
+[gd_scene load_steps=9 format=3 uid="uid://baanm1hbv81c3"]
+
+[ext_resource type="Texture2D" uid="uid://bx2s8bwk4wbtx" path="res://assets/sprites/leaf.png" id="1_btubn"]
+
+[sub_resource type="Gradient" id="Gradient_rgw74"]
+colors = PackedColorArray(0.105882354, 0.105882354, 0.105882354, 0.1764706, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_ik54w"]
+gradient = SubResource("Gradient_rgw74")
+
+[sub_resource type="Curve" id="Curve_o0q5e"]
+_data = [Vector2(0, 0.34177214), 0.0, 0.0, 0, 0, Vector2(0.4637224, 0.84367085), 0.0, 0.0, 0, 0, Vector2(0.9905362, 0.3253165), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_yatnc"]
+curve = SubResource("Curve_o0q5e")
+
+[sub_resource type="Curve" id="Curve_x3s58"]
+_limits = [-200.0, 200.0, 0.0, 1.0]
+_data = [Vector2(0, -96.202484), 0.0, 0.0, 0, 0, Vector2(0.48895898, 157.2152), 0.0, 0.0, 0, 0, Vector2(1, -138.9873), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_sh26v"]
+curve = SubResource("Curve_x3s58")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_hwhu5"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(20, 1, 1)
+direction = Vector3(1, -1, 0)
+initial_velocity_min = 25.0
+initial_velocity_max = 50.0
+angular_velocity_min = -1.6093254e-05
+angular_velocity_max = 193.84998
+gravity = Vector3(0, 50, 0)
+tangential_accel_curve = SubResource("CurveTexture_sh26v")
+scale_curve = SubResource("CurveTexture_yatnc")
+color_ramp = SubResource("GradientTexture1D_ik54w")
+
+[node name="GPUParticles2D" type="GPUParticles2D"]
+texture = ExtResource("1_btubn")
+process_material = SubResource("ParticleProcessMaterial_hwhu5")
